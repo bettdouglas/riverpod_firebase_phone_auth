@@ -40,6 +40,13 @@ class _$VerifyPhoneStatesTearOff {
       verificationId,
     );
   }
+
+  _Error error(Object error, StackTrace stackTrace) {
+    return _Error(
+      error,
+      stackTrace,
+    );
+  }
 }
 
 /// @nodoc
@@ -53,6 +60,7 @@ mixin _$VerifyPhoneStates {
     required TResult Function(FirebaseAuthException exception) failed,
     required TResult Function(String verificationId, int? resendToken) codeSent,
     required TResult Function(String verificationId) codeRetrievalTimeout,
+    required TResult Function(Object error, StackTrace stackTrace) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +69,7 @@ mixin _$VerifyPhoneStates {
     TResult Function(FirebaseAuthException exception)? failed,
     TResult Function(String verificationId, int? resendToken)? codeSent,
     TResult Function(String verificationId)? codeRetrievalTimeout,
+    TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,6 +79,7 @@ mixin _$VerifyPhoneStates {
     required TResult Function(_Failed value) failed,
     required TResult Function(_CodeSent value) codeSent,
     required TResult Function(_CodeRetrievalTimeout value) codeRetrievalTimeout,
+    required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +88,7 @@ mixin _$VerifyPhoneStates {
     TResult Function(_Failed value)? failed,
     TResult Function(_CodeSent value)? codeSent,
     TResult Function(_CodeRetrievalTimeout value)? codeRetrievalTimeout,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -169,6 +180,7 @@ class _$_Completed implements _Completed {
     required TResult Function(FirebaseAuthException exception) failed,
     required TResult Function(String verificationId, int? resendToken) codeSent,
     required TResult Function(String verificationId) codeRetrievalTimeout,
+    required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
     return completed(credential);
   }
@@ -180,6 +192,7 @@ class _$_Completed implements _Completed {
     TResult Function(FirebaseAuthException exception)? failed,
     TResult Function(String verificationId, int? resendToken)? codeSent,
     TResult Function(String verificationId)? codeRetrievalTimeout,
+    TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if (completed != null) {
@@ -195,6 +208,7 @@ class _$_Completed implements _Completed {
     required TResult Function(_Failed value) failed,
     required TResult Function(_CodeSent value) codeSent,
     required TResult Function(_CodeRetrievalTimeout value) codeRetrievalTimeout,
+    required TResult Function(_Error value) error,
   }) {
     return completed(this);
   }
@@ -206,6 +220,7 @@ class _$_Completed implements _Completed {
     TResult Function(_Failed value)? failed,
     TResult Function(_CodeSent value)? codeSent,
     TResult Function(_CodeRetrievalTimeout value)? codeRetrievalTimeout,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (completed != null) {
@@ -291,6 +306,7 @@ class _$_Failed implements _Failed {
     required TResult Function(FirebaseAuthException exception) failed,
     required TResult Function(String verificationId, int? resendToken) codeSent,
     required TResult Function(String verificationId) codeRetrievalTimeout,
+    required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
     return failed(exception);
   }
@@ -302,6 +318,7 @@ class _$_Failed implements _Failed {
     TResult Function(FirebaseAuthException exception)? failed,
     TResult Function(String verificationId, int? resendToken)? codeSent,
     TResult Function(String verificationId)? codeRetrievalTimeout,
+    TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -317,6 +334,7 @@ class _$_Failed implements _Failed {
     required TResult Function(_Failed value) failed,
     required TResult Function(_CodeSent value) codeSent,
     required TResult Function(_CodeRetrievalTimeout value) codeRetrievalTimeout,
+    required TResult Function(_Error value) error,
   }) {
     return failed(this);
   }
@@ -328,6 +346,7 @@ class _$_Failed implements _Failed {
     TResult Function(_Failed value)? failed,
     TResult Function(_CodeSent value)? codeSent,
     TResult Function(_CodeRetrievalTimeout value)? codeRetrievalTimeout,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -425,6 +444,7 @@ class _$_CodeSent implements _CodeSent {
     required TResult Function(FirebaseAuthException exception) failed,
     required TResult Function(String verificationId, int? resendToken) codeSent,
     required TResult Function(String verificationId) codeRetrievalTimeout,
+    required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
     return codeSent(verificationId, resendToken);
   }
@@ -436,6 +456,7 @@ class _$_CodeSent implements _CodeSent {
     TResult Function(FirebaseAuthException exception)? failed,
     TResult Function(String verificationId, int? resendToken)? codeSent,
     TResult Function(String verificationId)? codeRetrievalTimeout,
+    TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if (codeSent != null) {
@@ -451,6 +472,7 @@ class _$_CodeSent implements _CodeSent {
     required TResult Function(_Failed value) failed,
     required TResult Function(_CodeSent value) codeSent,
     required TResult Function(_CodeRetrievalTimeout value) codeRetrievalTimeout,
+    required TResult Function(_Error value) error,
   }) {
     return codeSent(this);
   }
@@ -462,6 +484,7 @@ class _$_CodeSent implements _CodeSent {
     TResult Function(_Failed value)? failed,
     TResult Function(_CodeSent value)? codeSent,
     TResult Function(_CodeRetrievalTimeout value)? codeRetrievalTimeout,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (codeSent != null) {
@@ -554,6 +577,7 @@ class _$_CodeRetrievalTimeout implements _CodeRetrievalTimeout {
     required TResult Function(FirebaseAuthException exception) failed,
     required TResult Function(String verificationId, int? resendToken) codeSent,
     required TResult Function(String verificationId) codeRetrievalTimeout,
+    required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
     return codeRetrievalTimeout(verificationId);
   }
@@ -565,6 +589,7 @@ class _$_CodeRetrievalTimeout implements _CodeRetrievalTimeout {
     TResult Function(FirebaseAuthException exception)? failed,
     TResult Function(String verificationId, int? resendToken)? codeSent,
     TResult Function(String verificationId)? codeRetrievalTimeout,
+    TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if (codeRetrievalTimeout != null) {
@@ -580,6 +605,7 @@ class _$_CodeRetrievalTimeout implements _CodeRetrievalTimeout {
     required TResult Function(_Failed value) failed,
     required TResult Function(_CodeSent value) codeSent,
     required TResult Function(_CodeRetrievalTimeout value) codeRetrievalTimeout,
+    required TResult Function(_Error value) error,
   }) {
     return codeRetrievalTimeout(this);
   }
@@ -591,6 +617,7 @@ class _$_CodeRetrievalTimeout implements _CodeRetrievalTimeout {
     TResult Function(_Failed value)? failed,
     TResult Function(_CodeSent value)? codeSent,
     TResult Function(_CodeRetrievalTimeout value)? codeRetrievalTimeout,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (codeRetrievalTimeout != null) {
@@ -608,4 +635,141 @@ abstract class _CodeRetrievalTimeout implements VerifyPhoneStates {
   @JsonKey(ignore: true)
   _$CodeRetrievalTimeoutCopyWith<_CodeRetrievalTimeout> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ErrorCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
+      __$ErrorCopyWithImpl<$Res>;
+  $Res call({Object error, StackTrace stackTrace});
+}
+
+/// @nodoc
+class __$ErrorCopyWithImpl<$Res> extends _$VerifyPhoneStatesCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
+      : super(_value, (v) => _then(v as _Error));
+
+  @override
+  _Error get _value => super._value as _Error;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+    Object? stackTrace = freezed,
+  }) {
+    return _then(_Error(
+      error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Object,
+      stackTrace == freezed
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Error implements _Error {
+  const _$_Error(this.error, this.stackTrace);
+
+  @override
+  final Object error;
+  @override
+  final StackTrace stackTrace;
+
+  @override
+  String toString() {
+    return 'VerifyPhoneStates.error(error: $error, stackTrace: $stackTrace)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Error &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.stackTrace, stackTrace) ||
+                const DeepCollectionEquality()
+                    .equals(other.stackTrace, stackTrace)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(stackTrace);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ErrorCopyWith<_Error> get copyWith =>
+      __$ErrorCopyWithImpl<_Error>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(PhoneAuthCredential credential) completed,
+    required TResult Function(FirebaseAuthException exception) failed,
+    required TResult Function(String verificationId, int? resendToken) codeSent,
+    required TResult Function(String verificationId) codeRetrievalTimeout,
+    required TResult Function(Object error, StackTrace stackTrace) error,
+  }) {
+    return error(this.error, stackTrace);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(PhoneAuthCredential credential)? completed,
+    TResult Function(FirebaseAuthException exception)? failed,
+    TResult Function(String verificationId, int? resendToken)? codeSent,
+    TResult Function(String verificationId)? codeRetrievalTimeout,
+    TResult Function(Object error, StackTrace stackTrace)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error, stackTrace);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Completed value) completed,
+    required TResult Function(_Failed value) failed,
+    required TResult Function(_CodeSent value) codeSent,
+    required TResult Function(_CodeRetrievalTimeout value) codeRetrievalTimeout,
+    required TResult Function(_Error value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Completed value)? completed,
+    TResult Function(_Failed value)? failed,
+    TResult Function(_CodeSent value)? codeSent,
+    TResult Function(_CodeRetrievalTimeout value)? codeRetrievalTimeout,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements VerifyPhoneStates {
+  const factory _Error(Object error, StackTrace stackTrace) = _$_Error;
+
+  Object get error => throw _privateConstructorUsedError;
+  StackTrace get stackTrace => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
 }

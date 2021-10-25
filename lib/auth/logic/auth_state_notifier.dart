@@ -71,6 +71,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> with LoggerMixin {
               state = const AuthState.codeRetreivalTimedOut();
             }
           },
+          error: (error, stackTrace) {
+            state = AuthState.unknownError(error, stackTrace);
+          },
         );
       }
     }

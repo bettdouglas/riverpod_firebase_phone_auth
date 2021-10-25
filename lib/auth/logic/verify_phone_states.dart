@@ -15,6 +15,6 @@ class VerifyPhoneStates with _$VerifyPhoneStates {
   ) = _CodeSent;
   const factory VerifyPhoneStates.codeRetrievalTimeout(String verificationId) =
       _CodeRetrievalTimeout;
+  const factory VerifyPhoneStates.error(Object error, StackTrace stackTrace) =
+      _Error;
 }
-
-

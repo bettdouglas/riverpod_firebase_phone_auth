@@ -19,25 +19,29 @@ class FirebasePhoneAuthService implements PhoneAuthService {
 
   @override
   Future<void> verifyPhoneNumber(String phone) async {
-    await firebaseAuth.verifyPhoneNumber(
-      phoneNumber: phone,
-      verificationCompleted: (PhoneAuthCredential credential) {
-        streamController.add(VerifyPhoneStates.completed(credential));
-      },
-      verificationFailed: (FirebaseAuthException exception) {
-        streamController.add(VerifyPhoneStates.failed(exception));
-      },
-      codeSent: (verificationId, resendToken) {
-        streamController.add(
-          VerifyPhoneStates.codeSent(verificationId, resendToken),
-        );
-      },
-      codeAutoRetrievalTimeout: (verificationId) {
-        streamController.add(
-          VerifyPhoneStates.codeRetrievalTimeout(verificationId),
-        );
-      },
-    );
+    try {
+      await firebaseAuth.verifyPhoneNumber(
+        phoneNumber: phone,
+        verificationCompleted: (PhoneAuthCredential credential) {
+          streamController.add(VerifyPhoneStates.completed(credential));
+        },
+        verificationFailed: (FirebaseAuthException exception) {
+          streamController.add(VerifyPhoneStates.failed(exception));
+        },
+        codeSent: (verificationId, resendToken) {
+          streamController.add(
+            VerifyPhoneStates.codeSent(verificationId, resendToken),
+          );
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+          streamController.add(
+            VerifyPhoneStates.codeRetrievalTimeout(verificationId),
+          );
+        },
+      );
+    } catch (e, st) {
+      streamController.add(VerifyPhoneStates.error(e, st));
+    }
   }
 
   @override

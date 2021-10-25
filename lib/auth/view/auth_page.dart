@@ -25,14 +25,13 @@ class AuthPage extends StatelessWidget {
         state.maybeWhen(
           orElse: () => null,
           gotFirebaseUser: (user) async {
-            final token = await user.getIdToken();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Row(
                   children: [
                     const Icon(Icons.check, color: Colors.white),
                     const SizedBox(width: 8),
-                    Expanded(child: Text(token)),
+                    Expanded(child: Text(user.uid)),
                   ],
                 ),
               ),

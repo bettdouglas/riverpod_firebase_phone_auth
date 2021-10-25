@@ -23,11 +23,19 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 ## Steps to use the template
-1. Ensure you've setup your app as per instructions on [FlutterFire](https://firebase.flutter.dev/docs/overview)
-2. Ensure phone authentication is enabled in firebase console for your project
+1. Clone the repository and rename the package to what you want it called. 
+``` flutter pub run change_app_package_name:main com.new.package.name ```
+2. run ```flutter create --org com.new.package.name ```
+4. Proceed to setup Firebase as per the instructions on [FlutterFire](https://firebase.flutter.dev/docs/overview)
+5. Ensure phone authentication is enabled in firebase console for your project
 3. For android ensure you've enabled SafetyNet [here](https://firebase.google.com/docs/auth/android/phone-auth)
 4. Download the google-services.json file into android/app
 5. Run the app.
 
 ## Issues
+### Known Issues
+- Not tested on iOS
+- Tests not written
+
+### Unknown Issues
 If you encounter any issues running the example, feel free to open an issue.

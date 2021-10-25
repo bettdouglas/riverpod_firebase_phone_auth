@@ -1,4 +1,4 @@
-package com.example.riverpod_phone_template
+package doug.example.firebase
 
 import io.flutter.embedding.android.FlutterActivity
 

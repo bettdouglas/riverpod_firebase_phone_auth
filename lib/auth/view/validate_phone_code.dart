@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class ValidatePhoneCode extends StatelessWidget {
-  ValidatePhoneCode({
+class SMSCodeInputWidget extends StatelessWidget {
+  SMSCodeInputWidget({
     Key? key,
     required this.onTap,
   }) : super(key: key);

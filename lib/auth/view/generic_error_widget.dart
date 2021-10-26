@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class ErrStWidget extends StatelessWidget {
-  const ErrStWidget({
+class GenericErrorWidget extends StatelessWidget {
+  const GenericErrorWidget({
     Key? key,
     required this.error,
     required this.message,

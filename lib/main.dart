@@ -87,7 +87,7 @@ class EntryPoint extends ConsumerWidget {
       ),
       loading: () => const SplashScreen(),
       error: (err, _) => Scaffold(
-        body: ErrStWidget(
+        body: GenericErrorWidget(
           error: err,
           message: 'Failed to initialize firebase app',
           retryWidget: ElevatedButton(

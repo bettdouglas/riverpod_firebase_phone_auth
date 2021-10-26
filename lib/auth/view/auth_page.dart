@@ -112,87 +112,42 @@ class AuthView extends ConsumerWidget with LoggerMixin {
         padding: const EdgeInsets.all(8.0),
         child: authState.when(
           initial: () => WelcomePage(
-            onSignInButtonAccepted: () {
+            onAcceptButtonPressed: () {
               authStateNotifier.acceptToUsePhone;
             },
           ),
-          loading: (msg) => Column(
-            children: [
-              Text(
-                msg,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: Adaptive.h(20)),
-              const CircularProgressIndicator(),
-            ],
-          ),
+          loading: (msg) => LoadingWidget(msg: msg),
           waitingForUserInput: () => PhoneInputWidget(
             verifyFunction: (validatedPhone) {
               authStateNotifier.verifyPhoneNumber(validatedPhone);
             },
           ),
-          codeSent: (verificationId) => ValidatePhoneCode(
+          codeSent: (verificationId) => SMSCodeInputWidget(
             onTap: (smsCode) {
               authStateNotifier.verifyCode(smsCode, verificationId);
             },
           ),
           gotFirebaseUser: (user) => whenAuthentcated(user),
           success: (firebaseUser, customUser) => whenAuthentcated(firebaseUser),
-          codeRetreivalTimedOut: () => ErrStWidget(
-            error: 'Timed-out when retreiving code',
-            message: 'Code Retreival Timed out',
-            retryWidget: ElevatedButton(
-              onPressed: () {
-                authStateNotifier.retry;
-              },
-              child: const Text('Try Again'),
-            ),
+          codeRetreivalTimedOut: () => CodeRetrievalTimedOutWidget(
+            onTryAgain: () => authStateNotifier.retry,
           ),
-          verificationError: (firebaseException, verificationId, msg) =>
-              ErrStWidget(
-            error: 'Verification Error',
-            message: msg ?? 'Verification Code error',
-            retryWidget: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (verificationId != null)
-                  ElevatedButton(
-                    onPressed: () {
-                      authStateNotifier.reEnterVerificationCode(verificationId);
-                    },
-                    child: const Text('Enter new code'),
-                  ),
-                ElevatedButton(
-                  onPressed: () {
-                    authStateNotifier.retry;
-                  },
-                  child: Container(
-                    child: const Text('Register with different phone'),
-                    alignment: Alignment.center,
-                    width: Adaptive.w(40),
-                  ),
-                )
-              ],
-            ),
+          verificationError: (_, verificationId, msg) => InvalidCodeWidget(
+            verificationId: verificationId,
+            invalidCodeMsg: msg,
+            onEnterNewCode: () {
+              if (verificationId != null) {
+                authStateNotifier.reEnterVerificationCode(verificationId);
+              }
+            },
+            onUseDifferentPhone: () => authStateNotifier.retry,
           ),
-          invalidPhoneNumber: (firebaseExc, retryFn, _) => ErrStWidget(
-            error: 'Failed to retrive verification code',
-            message: 'Failed to retrive verification code',
-            retryWidget: Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    authStateNotifier.retry;
-                  },
-                  child: const Text('Change Phone number'),
-                ),
-              ],
-            ),
+          invalidPhoneNumber: (_, retryFn, __) => InvalidPhoneNumberWidget(
+            onChangePhoneNumber: () {
+              authStateNotifier.retry;
+            },
           ),
-          unknownError: (error, stackTrace) => ErrStWidget(
+          unknownError: (error, stackTrace) => GenericErrorWidget(
             error: error,
             message: 'Unknown Error occured',
             retryWidget: ElevatedButton(
@@ -212,13 +167,126 @@ class AuthView extends ConsumerWidget with LoggerMixin {
   }
 }
 
+class InvalidPhoneNumberWidget extends StatelessWidget {
+  const InvalidPhoneNumberWidget({
+    Key? key,
+    required this.onChangePhoneNumber,
+  }) : super(key: key);
+
+  final VoidCallback onChangePhoneNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return GenericErrorWidget(
+      error: 'Failed to retrive verification code',
+      message: 'Failed to retrive verification code',
+      retryWidget: Row(
+        children: [
+          ElevatedButton(
+            onPressed: onChangePhoneNumber,
+            child: const Text('Change Phone number'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CodeRetrievalTimedOutWidget extends StatelessWidget {
+  const CodeRetrievalTimedOutWidget({
+    Key? key,
+    required this.onTryAgain,
+  }) : super(key: key);
+
+  final VoidCallback onTryAgain;
+
+  @override
+  Widget build(BuildContext context) {
+    return GenericErrorWidget(
+      error: 'Timed-out when retreiving code',
+      message: 'Code Retreival Timed out',
+      retryWidget: ElevatedButton(
+        onPressed: onTryAgain,
+        child: const Text('Try Again'),
+      ),
+    );
+  }
+}
+
+class InvalidCodeWidget extends StatelessWidget {
+  const InvalidCodeWidget({
+    Key? key,
+    required this.verificationId,
+    required this.onEnterNewCode,
+    required this.onUseDifferentPhone,
+    required this.invalidCodeMsg,
+  }) : super(key: key);
+
+  final String? verificationId;
+  final String? invalidCodeMsg;
+  final VoidCallback onUseDifferentPhone;
+  final VoidCallback onEnterNewCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return GenericErrorWidget(
+      error: 'Verification Error',
+      message: invalidCodeMsg ?? 'Verification Code error',
+      retryWidget: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (verificationId != null)
+            ElevatedButton(
+              onPressed: onEnterNewCode,
+              child: const Text('Enter new code'),
+            ),
+          ElevatedButton(
+            onPressed: onUseDifferentPhone,
+            child: Container(
+              child: const Text('Register with different phone'),
+              alignment: Alignment.center,
+              width: Adaptive.w(40),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({
+    Key? key,
+    required this.msg,
+  }) : super(key: key);
+
+  final String msg;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          msg,
+          style: Theme.of(context)
+              .textTheme
+              .headline4!
+              .copyWith(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: Adaptive.h(20)),
+        const CircularProgressIndicator(),
+      ],
+    );
+  }
+}
+
 class WelcomePage extends StatelessWidget {
   const WelcomePage({
     Key? key,
-    required this.onSignInButtonAccepted,
+    required this.onAcceptButtonPressed,
   }) : super(key: key);
 
-  final VoidCallback? onSignInButtonAccepted;
+  final VoidCallback? onAcceptButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +313,7 @@ class WelcomePage extends StatelessWidget {
           alignment: Alignment.center,
           height: 10.h,
           child: ElevatedButton(
-            onPressed: onSignInButtonAccepted,
+            onPressed: onAcceptButtonPressed,
             child: const Text('Sign in with your mobile number'),
           ),
         ),
